@@ -28,4 +28,40 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # HINT: use String#split to split up the rating_list, then
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
+  ratings = rating_list.split(",").map{|c| c.strip}
+  ratings.each do |r|
+    if uncheck == 'un'
+      step %Q{I uncheck "ratings_#{r}"}
+    else
+      step %Q{I check "ratings_#{r}"}
+    end
+  end
+end
+
+# I should see the following movies:"a", "b", "c"
+Then /I should (not )?see the following movies: (.*)/ do |my_not,movie_list|
+  #remove leading and trailing double quote
+  movie_list = movie_list.gsub(/^"/,"").gsub(/"$/,"")
+
+  movie_list.split(/"\s*,\s*"/).each do |movie|
+    
+    if my_not
+      step %Q{I should not see "#{movie}"}
+    else
+      step %Q{I should see "#{movie}"}
+    end
+
+  end
+end
+
+# I should see no/all movies
+Then /I should see (none|all) of the movies/ do |m_no_all|
+
+  Movie.all.each do |movie|
+    if m_no_all == 'none'
+      step %Q{I should not see "#{movie.title}"}
+    else
+      step %Q{I should see "#{movie.title}"}
+    end
+  end
 end
