@@ -29,10 +29,9 @@ end
 
 Then /I should see the following movies in order: (.*)/ do |movie_list|
   # ensure that the movies in the list occure one after the other
-
   movies = movie_list.split(/\s*,\s*/)
   for i in 1..movies.length-1
-    puts %Q{I should see #{movies[i-1]} before #{movies[i]}}
+    step %Q{I should see #{movies[i-1]} before #{movies[i]}}
   end
 end
 
