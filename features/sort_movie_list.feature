@@ -20,10 +20,15 @@ Background: movies have been added to database
   | Chicken Run             | G      | 21-Jun-2000  |
 
   And I am on the RottenPotatoes home page
+  When I check the following ratings: PG,R,G,PG-13,NC-17
+  And I press "Refresh"
 
 Scenario: sort movies alphabetically
   # your steps here
+  And I follow "Movie Title"
+  Then I should see the following movies in order: "2001: A Space Odyssey", "Aladdin","Amelie","Chocolat","Chicken Run", "Raiders of the Lost Ark", "The Help", "The Incredibles","The Terminator", "When Harry Met Sally"
 
 Scenario: sort movies in increasing order of release date
   # your steps here
-
+  And I follow "Release Date"
+  Then I should see the following movies in order: "2001: A Space Odyssey", "Raiders of the Lost Ark", "The Terminator", "When Harry Met Sally", "Aladdin", "Chicken Run", "Chocolat", "Amelie", "The Help"

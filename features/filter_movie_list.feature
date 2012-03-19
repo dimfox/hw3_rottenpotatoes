@@ -20,7 +20,7 @@ Background: movies have been added to database
   | Chicken Run             | G      | 21-Jun-2000  |
 
   And  I am on the RottenPotatoes home page
-  
+
 Scenario: restrict to movies with 'PG' or 'R' ratings
   # enter step(s) to check the 'PG' and 'R' checkboxes
   When I check the following ratings: PG, R
